@@ -4,6 +4,11 @@ cmake_minimum_required(VERSION 3.13.4)
 #2.project name，指定项目的名称，一般和项目的文件夹名称对应
 PROJECT(clox)
 
+#2.添加编译选项
+SET(CMAKE_BUILD_TYPE "Debug") #Debug,Release
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+
 #3.head file path，头文件目录
 INCLUDE_DIRECTORIES(
 include

@@ -18,7 +18,7 @@ static void repl(void)
 			printf("\n");
 			break;
 		}
-
+		printf("debug:line%s\n",line);
 		interprt(line);
 	}
 }
