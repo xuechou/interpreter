@@ -9,7 +9,7 @@ typedef struct  ObjString ObjString;
 typedef enum{
 	VAL_BOOL,
 	VAL_NIL,
-	VAL_NUMBER, //??? why add ,
+	VAL_NUMBER,
 	VAL_OBJ
 } ValueType;
 
