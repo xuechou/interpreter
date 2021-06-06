@@ -12,6 +12,7 @@ typedef struct {
   uint8_t* ip; //ip is next instruction
   Value stack[STACK_MAX];
   Value* stackTop;
+  Table globals;
   Table strings;  //字符串都存在hash table
   Obj* objects;
 } VM;
