@@ -223,7 +223,6 @@ static ObjFunction* endCompiler()
 	ObjFunction* function = current->function;
 #ifdef DEBUG_PRINT_CODE
 	if(!parser.hadError){
-		printf("disassembleChunk() in endCompiler() compiler.c \n");
 		disassembleChunk(currentChunk(), function->name != NULL ? function->name->chars : "<script>");
 	}
 #endif
@@ -358,8 +357,8 @@ static void namedVariable(Token name, bool canAssign)
 		setOp = OP_SET_LOCAL;
 	}else{
 		arg = identifierContant(&name);
-		getOp = OP_GET_LOCAL;
-		setOp = OP_SET_LOCAL;
+		getOp = OP_GET_GLOBAL;
+		setOp = OP_SET_GLOBAL;
 	}
 
 	if(canAssign && match(TOKEN_EQUAL))
@@ -418,7 +417,7 @@ ParseRule rules[] = {
     [TOKEN_IDENTIFIER]    = {variable, NULL,   PREC_NONE},
     [TOKEN_STRING]        = {string,   NULL,   PREC_NONE},
     [TOKEN_NUMBER]        = {number,   NULL,   PREC_NONE},
-    [TOKEN_AND]           = {NULL,     and_,   PREC_NONE},
+    [TOKEN_AND]           = {NULL,     and_,   PREC_AND},
     [TOKEN_CLASS]         = {NULL,     NULL,   PREC_NONE},
     [TOKEN_ELSE]          = {NULL,     NULL,   PREC_NONE},
     [TOKEN_FALSE]         = {literal,  NULL,   PREC_NONE},
@@ -426,7 +425,7 @@ ParseRule rules[] = {
     [TOKEN_FUN]           = {NULL,     NULL,   PREC_NONE},
     [TOKEN_IF]            = {NULL,     NULL,   PREC_NONE},
     [TOKEN_NIL]           = {literal,  NULL,   PREC_NONE},
-    [TOKEN_OR]            = {NULL,     or_,   PREC_NONE},
+    [TOKEN_OR]            = {NULL,     or_,    PREC_OR},
     [TOKEN_PRINT]         = {NULL,     NULL,   PREC_NONE},
     [TOKEN_RETURN]        = {NULL,     NULL,   PREC_NONE},
     [TOKEN_SUPER]         = {NULL,     NULL,   PREC_NONE},

@@ -182,7 +182,7 @@ static InterpretResult run()
 	  double a = AS_NUMBER(pop()); \
 	  push(valueType(a op b)); \
 	}while(false)
-	printf("\nfor(;;) in run() vm.c");
+	printf("\nrun() in vm.c");
 	for (;;)
 	{
 #ifdef DEBUG_TRACE_EXECUTION
