@@ -347,3 +347,5 @@ run() in vm.c          [<script>]
           [<script>][nil]
 0026    | OP_RETURN
 ```
+
+## 25. Closures 闭包

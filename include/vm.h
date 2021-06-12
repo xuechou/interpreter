@@ -10,7 +10,7 @@
 
 typedef struct
 {
-	ObjFunction* function;
+	ObjClosure* closure;
 	uint8_t* ip;
 	Value* slots;
 } CallFrame;
@@ -23,6 +23,7 @@ typedef struct {
   Value* stackTop;
   Table globals;
   Table strings;  //字符串都存在hash table
+  ObjUpvalue* openUpvalues;
   Obj* objects;
 } VM;
 
