@@ -24,7 +24,12 @@ typedef struct {
   Table globals;
   Table strings;  //字符串都存在hash table
   ObjUpvalue* openUpvalues;
+  size_t bytesAllocated;
+  size_t nextGC;
   Obj* objects;
+  int grayCount;
+  int grayCapacity;
+  Obj** grayStack;
 } VM;
 
 typedef enum {

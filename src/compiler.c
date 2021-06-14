@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "compiler.h"
+#include "memory.h"
 #include "common.h"
 #include "scanner.h"
 #include "object.h"
@@ -61,12 +62,13 @@ typedef enum{
 	TYPE_SCRIPT
 } FunctionType;
 
+//每个函数加上top-level function都对应一个Compiler,Compiler{function{chunk}}
 typedef struct Compiler	//struct后面不加Compiler,编译器警告??? 
 {
 	struct Compiler* enclosing; //??? 可以这样嘛？ 这是递归定义??
-	ObjFunction* function;
+	ObjFunction* function; 
 	FunctionType type;
-	Local locals[UINT8_COUNT];
+	Local locals[UINT8_COUNT];//??? 只包含当前函数的locals
 	int localCount; // track how many locals are in scope
 	Upvalue upvalues[UINT8_COUNT];
 	int scopeDepth;
@@ -207,6 +209,7 @@ static void patchJump(int offset)
 	currentChunk()->code[offset + 1] = jump & 0xff;
 }
 
+// struct Compiler的初始化函数，分别初始化top-level和普通函数。每个函数建立一个Compiler，感觉很奇怪?? 这里的compiler概念是什么???
 static void initCompiler(Compiler* compiler, FunctionType type)
 {
 	compiler->enclosing = current;
@@ -215,12 +218,12 @@ static void initCompiler(Compiler* compiler, FunctionType type)
 	compiler->localCount = 0;
 	compiler->scopeDepth = 0;
 	compiler->function = newFunction();//?? repet line 200
-	current = compiler;
+	current = compiler;// 切换compiler
 	if(type != TYPE_SCRIPT) {
 		current->function->name = copyString(parser.previous.start, parser.previous.length);
 	}
 
-	Local* local = &current->locals[current->localCount++];
+	Local* local = &current->locals[current->localCount++];//??? ++干什么
 	local->depth = 0;
 	local->isCaptured = false;
 	local->name.start = "";
@@ -935,4 +938,14 @@ ObjFunction* compile(const char *source)
 	ObjFunction* function = endCompiler();
 
 	return parser.hadError ? NULL : function;
+}
+
+void markCompilerRoots()
+{
+	Compiler* compiler = current;
+	while(compiler != NULL)
+	{
+		markObject((Obj*)compiler->function);
+		compiler = compiler->enclosing;
+	}
 }

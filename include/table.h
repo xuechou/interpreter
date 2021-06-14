@@ -24,4 +24,7 @@ bool tableSet(Table* table, ObjString* key, Value value); // return true is add 
 bool tableDelete(Table* table, ObjString* key);// delete key-value from hash table
 void tableAddAll(Table* from, Table* to); // copy hash table ?? do what
 ObjString* tableFindString(Table* table, const char* chars, int length, uint32_t hash); // 还提供直接通过c style的字符串来查找的接口
+void tableRemoveWhite(Table* table);
+void markTable(Table* table);
+
 #endif

@@ -349,3 +349,6 @@ run() in vm.c          [<script>]
 ```
 
 ## 25. Closures 闭包
+?闭包的概念
+?使用闭包的场合
+
