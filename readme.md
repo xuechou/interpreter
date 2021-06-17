@@ -2,6 +2,17 @@ learn form https://craftinginterpreters.com/
 
 # A BYTECODE VIRTUAL MACHINE 字节码虚拟机
 
+## 编译方法
+经典的cmake编译三个步骤
+```sh
+mkdir build  #新建build文件夹来保存编译过程中的临时文件
+cd build
+
+cmake ..  #生成makefile
+
+make
+```
+
 ## chunks of bytecode 
 `bytecode`  each instruction has a one-byte operation code
 `chunk` 字节码的序列
@@ -352,3 +363,6 @@ run() in vm.c          [<script>]
 ?闭包的概念
 ?使用闭包的场合
 
+## 26. Garbage Collection 垃圾收集
+
+## 27. Classes and Instances 

@@ -6,8 +6,10 @@ PROJECT(clox)
 
 #2.添加编译选项
 SET(CMAKE_BUILD_TYPE "Debug") #Debug,Release
-SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb") #debug下支持gdb调试
 SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+
+SET(CMAKE_C_FLAGS "-std=c99")
 
 #3.head file path，头文件目录
 INCLUDE_DIRECTORIES(
