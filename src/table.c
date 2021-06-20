@@ -80,7 +80,7 @@ static void adjustCapacity(Table *table, int capacity)
 	for (int i = 0; i < table->capacity; i++)
 	{
 		Entry *entry = &table->entries[i];
-		if (entry->key = NULL)
+		if (entry->key == NULL)
 			continue;
 
 		Entry *dest = findEntry(entries, capacity, entry->key);

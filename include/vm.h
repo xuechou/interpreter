@@ -23,6 +23,7 @@ typedef struct {
   Value* stackTop;
   Table globals;
   Table strings;  //字符串都存在hash table
+  ObjString* initString;
   ObjUpvalue* openUpvalues;
   size_t bytesAllocated;
   size_t nextGC;
