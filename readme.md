@@ -2,8 +2,8 @@ learn form https://craftinginterpreters.com/
 
 # A BYTECODE VIRTUAL MACHINE 字节码虚拟机
 
-## 编译方法
-经典的cmake编译三个步骤
+## 本项目的构建步骤
+经典的cmake编译三步
 ```sh
 mkdir build  #新建build文件夹来保存编译过程中的临时文件
 cd build
@@ -13,7 +13,7 @@ cmake ..  #生成makefile
 make
 ```
 
-## chunks of bytecode 
+## 14. Chunks of Bytecode 
 `bytecode`  each instruction has a one-byte operation code
 `chunk` 字节码的序列
 
@@ -366,3 +366,25 @@ run() in vm.c          [<script>]
 ## 26. Garbage Collection 垃圾收集
 
 ## 27. Classes and Instances 
+
+## 29. Superclasses
+
+```
+class Doughnut {
+  cook() {
+    print "Dunk in the fryer.";
+    this.finish("sprinkles");
+  }
+
+  finish(ingredient) {
+    print "Finish with " + ingredient;
+  }
+}
+
+class Cruller < Doughnut {
+  finish(ingredient) {
+    // No sprinkles, always icing.
+    super.finish("icing");
+  }
+}
+```
